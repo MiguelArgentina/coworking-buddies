@@ -63,3 +63,11 @@ group :development do
   # gem "spring"
 end
 
+
+gem "devise", "~> 4.9"
+
+gem "geocoder", "~> 1.8"
+
+gem "annotate", "~> 3.2"
+
+gem "pry-rails", "~> 0.3.11", groups: [:development, :test]
