@@ -1,0 +1,19 @@
+<!-- Main Content -->
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-cyan-100 px-6 pb-12">
+  <div class="text-center bg-white/70 backdrop-blur-xl border border-indigo-200 shadow-2xl p-10 rounded-[2rem] max-w-3xl w-full transform transition duration-300 hover:scale-[1.01]">
+    <h2 class="text-5xl font-extrabold text-slate-800 mb-6 leading-tight tracking-tight">
+      🌐 Explore coworking freedom
+    </h2>
+
+    <div class="mt-6 text-center">
+      <%= link_to "View Recommended Places", places_path, class: "text-indigo-700 hover:underline font-medium" %>
+    </div>
+
+
+    <% if user_signed_in? %>
+      <p class="text-lg text-slate-600">Welcome back, <strong><%= current_user.name.presence || current_user.email %></strong> 👋</p>
+    <% else %>
+      <p class="text-lg text-gray-700 mb-2">Join a growing community of remote workers near you.</p>
+    <% end %>
+  </div>
+</div>

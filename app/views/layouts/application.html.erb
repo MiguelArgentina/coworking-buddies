@@ -11,13 +11,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <div class="w-full max-w-2xl mx-auto">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </div>
-      <%= yield %>
-    </main>
+  <body class="pt-16 bg-gradient-to-br from-indigo-100 via-white to-cyan-100">
+    <%= render "shared/flash" %>
+    <%= render "shared/navbar" %>
+    <%= yield %>
   </body>
 </html>

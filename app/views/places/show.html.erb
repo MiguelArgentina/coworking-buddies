@@ -1,0 +1,77 @@
+<!-- Load Leaflet assets -->
+<%= render "shared/leaflet_assets" %>
+
+<div class="max-w-3xl mx-auto mt-10 px-4">
+  <div class="bg-white/70 backdrop-blur-xl border border-indigo-200 shadow-xl rounded-2xl p-8">
+    <!-- Title -->
+    <h2 class="text-4xl font-bold text-slate-800 mb-4"><%= @place.name %></h2>
+
+    <!-- Image -->
+    <div class="mb-6">
+      <img src="https://lh5.googleusercontent.com/p/AF1QipNS1pD4BqY9q7oVmUWE32ElYeF3qFZ6lo6Gu_mU=w1080-h624-n-k-no" alt="<%= @place.name %>" class="w-full h-64 object-cover rounded-lg shadow-md">
+    </div>
+
+    <!-- Description -->
+    <p class="text-gray-700 text-lg mb-4"><%= @place.description.presence || "No description provided." %></p>
+
+
+    <div class="mt-6 bg-white/60 backdrop-blur-md border border-gray-200 rounded-xl shadow-md p-6 max-w-xl mx-auto">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">How do you feel about this place?</h3>
+
+      <div class="flex items-center justify-center gap-6 mb-4">
+        <%= button_to "👍", place_votes_path(@place, value: 1),
+                      method: :post,
+                      class: "text-2xl hover:scale-110 transition",
+                      form: { data: { turbo_stream: true } } %>
+
+        <span class="text-xl font-semibold text-gray-700">
+          <%= @place.total_score_percentage %>% satisfaction
+        </span>
+
+        <%= button_to "👎", place_votes_path(@place, value: -1),
+                      method: :post,
+                      class: "text-2xl hover:scale-110 transition",
+                      form: { data: { turbo_stream: true } } %>
+      </div>
+
+      <p class="text-center text-sm text-gray-600">
+        <%= pluralize(@place.total_votes, "vote") %> submitted
+      </p>
+
+      <p class="text-center text-xs text-gray-500 mt-2">
+        Last <%= distance_of_time_in_words(@place.class::RECENT_PERIOD.ago, Time.current) %>:
+        <%= @place.recent_score_percentage %>% from
+        <%= pluralize(@place.recent_votes, "vote") %>
+      </p>
+    </div>
+
+
+
+
+
+    <!-- Address -->
+    <div class="mt-4 mb-2 text-sm text-gray-600">
+      <strong>📍 Address:</strong> <%= @place.full_address %>
+    </div>
+
+    <!-- Coordinates (optional, if present) -->
+    <% if @place.latitude.present? && @place.longitude.present? %>
+      <div class="mb-4 text-sm text-gray-600">
+        <strong>🧭 Coordinates:</strong> <%= @place.latitude %>, <%= @place.longitude %>
+      </div>
+    <% end %>
+
+    <!-- Show the location in a map -->
+    <%= render "shared/map", place: @place %>
+
+
+    <!-- Edit button for owner -->
+    <% if current_user == @place.user %>
+      <div class="mt-6">
+        <%= link_to "Edit this Place", edit_place_path(@place),
+                    class: "inline-block bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold px-4 py-2 rounded" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

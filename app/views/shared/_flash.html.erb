@@ -1,0 +1,23 @@
+<% if notice %>
+  <div data-controller="flash" data-flash-target="container"
+       class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-md shadow-sm text-sm text-center w-fit max-w-[90vw]">
+    <%= notice %>
+    <button type="button"
+            class="absolute right-3 top-2 text-green-800 hover:text-green-900 text-xl font-bold leading-none"
+            data-action="click->flash#dismiss">
+      &times;
+    </button>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div data-controller="flash" data-flash-target="container"
+       class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded-md shadow-sm text-sm text-center w-fit max-w-[90vw]">
+    <%= alert %>
+    <button type="button"
+            class="absolute right-3 top-2 text-red-800 hover:text-red-900 text-xl font-bold leading-none"
+            data-action="click->flash#dismiss">
+      &times;
+    </button>
+  </div>
+<% end %>

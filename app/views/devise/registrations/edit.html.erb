@@ -1,43 +1,110 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div class="w-full max-w-3xl bg-white shadow-md rounded-2xl p-10">
+    <h2 class="text-2xl font-bold text-center mb-6">Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="mb-4">
+        <%= f.label :name, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :name, autocomplete: "name", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="mb-4">
+        <%= f.label :bio, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_area :bio, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="mb-4">
+        <%= f.label :location, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :location, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :address, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :address, autocomplete: "street-address", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="text-sm text-gray-600 mb-4">
+          Currently waiting confirmation for: <strong><%= resource.unconfirmed_email %></strong>
+        </div>
+      <% end %>
+
+      <!-- New Password -->
+      <div class="mb-4" data-controller="password-visibility">
+        <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+        <div class="relative">
+          <%= f.password_field :password,
+                               autocomplete: "new-password",
+                               class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 pr-12",
+                               data: { password_visibility_target: "input" } %>
+
+          <button type="button"
+                  data-password-visibility-target="toggle"
+                  data-action="click->password-visibility#toggle"
+                  class="absolute right-3 top-1/2 transform -translate-y-1/2 text-xl">
+            🙈
+          </button>
+        </div>
+        <% if @minimum_password_length %>
+          <small class="text-sm text-gray-500"><%= @minimum_password_length %> characters minimum</small>
+        <% end %>
+      </div>
+
+      <!-- Password Confirmation -->
+      <div class="mb-4" data-controller="password-visibility">
+        <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
+        <div class="relative">
+          <%= f.password_field :password_confirmation,
+                               autocomplete: "new-password",
+                               class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 pr-12",
+                               data: { password_visibility_target: "input" } %>
+
+          <button type="button"
+                  data-password-visibility-target="toggle"
+                  data-action="click->password-visibility#toggle"
+                  class="absolute right-3 top-1/2 transform -translate-y-1/2 text-xl">
+            🙈
+          </button>
+        </div>
+      </div>
+
+      <!-- Current Password -->
+      <div class="mb-6" data-controller="password-visibility">
+        <%= f.label :current_password, class: "block text-sm font-medium text-gray-700" %>
+        <div class="relative">
+          <%= f.password_field :current_password,
+                               autocomplete: "current-password",
+                               class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 pr-12",
+                               data: { password_visibility_target: "input" } %>
+
+          <button type="button"
+                  data-password-visibility-target="toggle"
+                  data-action="click->password-visibility#toggle"
+                  class="absolute right-3 top-1/2 transform -translate-y-1/2 text-xl">
+            🙈
+          </button>
+        </div>
+        <small class="text-sm text-gray-500 block mt-1">We need your current password to confirm your changes</small>
+      </div>
+
+
+      <div class="mb-6">
+        <%= f.submit "Update", class: "w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition" %>
+      </div>
     <% end %>
+
+    <div class="text-center text-sm text-gray-600 mt-6">
+      <%= button_to "Cancel my account", registration_path(resource_name), method: :delete,
+                    data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" },
+                    class: "text-red-600 hover:underline" %><br>
+      <%= link_to "Back", root_path, class: "text-blue-500 hover:underline mt-4 inline-block" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

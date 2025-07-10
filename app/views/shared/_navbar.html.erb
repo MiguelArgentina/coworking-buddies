@@ -1,0 +1,64 @@
+<!-- Responsive Navbar -->
+<header class="fixed top-0 left-0 w-full z-50 h-16 bg-gradient-to-r from-[#f5f7fa] via-[#e4ecf2] to-[#fefeff] backdrop-blur-md border-b border-white/20 shadow-sm" data-controller="mobile-menu">
+  <div class="h-full max-w-7xl mx-auto px-6 flex justify-between items-stretch">
+    <h1 class="flex items-center text-2xl font-bold text-indigo-700 tracking-tight">
+      <%= link_to root_path, class: "flex items-center" do %>
+        Coworking Buddies
+        <% end %>
+    </h1>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex h-full">
+      <% if user_signed_in? %>
+        <%= link_to edit_user_registration_path,
+                    class: "flex items-center h-full px-6 font-medium text-[#4b5d9a] bg-[#f2f6fd] hover:bg-[#e5edfb] transition duration-200" do %>
+          Edit Profile
+        <% end %>
+
+        <%= button_to destroy_user_session_path, method: :delete, form: { class: "inline" },
+                      class: "flex items-center h-full px-6 font-medium text-[#a33c5b] bg-[#fdf1f5] hover:bg-[#fadbe5] transition duration-200" do %>
+          Logout
+        <% end %>
+      <% else %>
+        <%= link_to new_user_registration_path,
+                    class: "flex items-center h-full px-6 font-medium text-green-800 bg-green-100 hover:bg-green-200 transition duration-200" do %>
+          Sign Up
+        <% end %>
+
+        <%= link_to new_user_session_path,
+                    class: "flex items-center h-full px-6 font-medium text-blue-800 bg-blue-100 hover:bg-blue-200 transition duration-200" do %>
+          Login
+        <% end %>
+      <% end %>
+      <%= render "shared/places_nav_links" %>
+    </nav>
+
+    <!-- Mobile menu button -->
+    <button
+      data-action="click->mobile-menu#toggle"
+      class="md:hidden flex items-center text-gray-800 focus:outline-none"
+      aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <!-- Mobile nav -->
+    <nav data-mobile-menu-target="menu" class="md:hidden hidden px-6 pb-4 bg-white/90 backdrop-blur-md shadow-md space-y-3 absolute top-16 left-0 w-full z-40">
+      <% if user_signed_in? %>
+        <%= link_to "Edit Profile", edit_user_registration_path, class: "block py-2 px-4 text-[#4b5d9a] hover:bg-[#e5edfb] rounded-md transition" %>
+        <%= button_to destroy_user_session_path,
+                      method: :delete,
+                      form: { class: "w-full" },
+                      class: "block w-full text-left py-2 px-4 text-[#a33c5b] hover:bg-[#fadbe5] rounded-md transition" do %>
+          Logout
+        <% end %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "block py-2 px-4 text-green-700 hover:bg-green-100 rounded-md transition" %>
+        <%= link_to "Login", new_user_session_path, class: "block py-2 px-4 text-blue-700 hover:bg-blue-100 rounded-md transition" %>
+      <% end %>
+      <%= render "shared/places_nav_links" %>
+    </nav>
+  </div>
+</header>
