@@ -2,7 +2,6 @@
 
 Will update the readme later with more details.
 
-Things you may want to cover:
 
 * Ruby version
 
