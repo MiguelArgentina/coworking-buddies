@@ -33,6 +33,7 @@
 
 ### Setup
 
+* ...
 ```bash
 git clone https://github.com/MiguelArgentina/coworking_buddies.git
 cd coworking_buddies
@@ -65,7 +66,8 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 | Username          | Contribution                 |
 |-------------------|------------------------------|
-| MiguelArgentina   | Creator / Fullstack Dev      |
+| MiguelArgentina   | Creator / Fullstack Ruby Dev |
+
 
 Want to contribute? Clone this repo, open a PR, and you’ll be listed here!
 
