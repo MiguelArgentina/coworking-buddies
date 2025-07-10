@@ -75,4 +75,5 @@ Want to contribute? Clone this repo, open a PR, and you’ll be listed here!
 
 ## 📄 License
 
-MIT License. See [`LICENSE`](LICENSE) for more info.
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
