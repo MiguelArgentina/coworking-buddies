@@ -6,7 +6,8 @@
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-2.x-38bdf8?logo=tailwindcss&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-**Coworking Buddies** is a community-powered platform where remote workers can discover and share their favorite coworking spaces around the world. Add places, view them on a map, vote on quality, and plan your next productive session.
+**Coworking Buddies** is a community-powered platform where remote workers can discover and share their favorite coworking spaces around the world.
+Add places, view them on a map, vote on quality, and plan your next productive session.
 
 ---
 
