@@ -7,6 +7,11 @@ Rails.application.routes.draw do
 
   resources :places, only: [:index] do
     resources :votes, only: [:create]
+    end
+
+  resources :events, only: [:index] do
+    resources :event_comments, only: [:create]
+    resources :event_participations, only: [:create, :destroy]
   end
 
   namespace :locations do
@@ -17,6 +22,7 @@ Rails.application.routes.draw do
   # Authenticated-only routes
   authenticate :user do
     resources :places, except: [:index]
+    resources :events, except: [:index]
 
 
 

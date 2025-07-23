@@ -108,3 +108,20 @@
     </div>
   </div>
 <% end %>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const countrySelect = document.querySelector("#place_country_id");
+        const stateSelect = document.querySelector("#place_state_id");
+
+        if (countrySelect && countrySelect.value) {
+            // Trigger the dependent loading for states
+            countrySelect.dispatchEvent(new Event("change"));
+        }
+
+        if (stateSelect && stateSelect.value) {
+            // Trigger loading for cities
+            stateSelect.dispatchEvent(new Event("change"));
+        }
+    });
+
+</script>

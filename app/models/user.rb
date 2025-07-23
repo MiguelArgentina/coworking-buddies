@@ -29,6 +29,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :places, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :events
+  has_many :event_participations
+  has_many :attending_events, through: :event_participations, source: :event
+  has_many :event_comments
 
   geocoded_by :address
   after_validation :geocode

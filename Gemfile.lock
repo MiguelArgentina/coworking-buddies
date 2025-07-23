@@ -109,6 +109,8 @@ GEM
     drb (2.2.3)
     erb (5.0.1)
     erubi (1.13.1)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     geocoder (1.8.5)
       base64 (>= 0.1.0)
       csv (>= 3.0.0)
@@ -292,6 +294,7 @@ DEPENDENCIES
   countries
   debug
   devise (~> 4.9)
+  friendly_id
   geocoder (~> 1.8)
   importmap-rails
   jbuilder

@@ -1,0 +1,58 @@
+<h1 class="text-2xl font-bold mb-6 text-center">Upcoming Events</h1>
+
+<div class="flex justify-center mb-6">
+  <button
+    id="toggle-past-events"
+    class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-4 py-2 rounded transition"
+  >
+    Hide Past Events
+  </button>
+</div>
+
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 max-w-7xl mx-auto" id="events-grid">
+  <% @events.each do |event| %>
+    <% is_past = event.end_time.present? && event.end_time < Time.current %>
+    <div class="<%= is_past ? 'past-event' : '' %> event-item">
+      <%= link_to event_path(event), class: "block bg-white/80 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 backdrop-blur-md" do %>
+        <div class="h-48 bg-cover bg-center bg-indigo-100 flex items-center justify-center">
+          <span class="text-indigo-700 text-xl font-semibold"><%= event.start_time.strftime("%b %-d, %Y") %></span>
+        </div>
+
+        <div class="p-4">
+          <p class="text-sm text-gray-600 mb-1">🕓 <%= event.start_time.strftime("%-I:%M %p") %></p>
+          <p class="text-sm text-gray-600 mb-2">⏱️ <%= distance_of_time_in_words(event.start_time, event.end_time || Time.current) %></p>
+
+          <h3 class="text-lg font-bold text-slate-800 mb-1"><%= event.title %></h3>
+          <p class="text-sm text-gray-600 mb-2"><%= truncate(event.description, length: 100) %></p>
+          <p class="text-xs text-gray-500">
+            at <%= event.place.name %><br>
+            (<%= event.place.city %>, <%= event.place.state&.name %>)
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.getElementById("toggle-past-events");
+        const pastEventElements = document.querySelectorAll(".past-event");
+        let showingPast = true;
+
+        toggleButton.addEventListener("click", () => {
+            showingPast = !showingPast;
+            pastEventElements.forEach(el => {
+                el.style.display = showingPast ? "block" : "none";
+            });
+            toggleButton.innerText = showingPast ? "Hide Past Events" : "Show Past Events";
+        });
+    });
+</script>
+
+<style>
+    .past-event {
+        opacity: 0.5;
+        filter: grayscale(0.5);
+    }
+</style>

@@ -19,7 +19,10 @@ class PlacesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @states = State.where(country_id: @place.country_id)
+    @cities = City.where(state_id: @place.state_id)
+  end
 
   def update
     if @place.update(place_params)
@@ -30,7 +33,7 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @place = Place.includes(:user).find(params[:id])
+    @place = Place.includes(:user).friendly.find(params[:id])
     @events = @place.events.order(start_time: :asc)
     @event = @place.events.build
   end
@@ -43,7 +46,7 @@ class PlacesController < ApplicationController
   private
 
   def set_place
-    @place = current_user.places.find(params[:id])
+    @place = current_user.places.friendly.find(params[:id])
   end
 
   def place_params
