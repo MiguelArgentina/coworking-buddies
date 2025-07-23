@@ -20,6 +20,12 @@
           <%= f.label :description, class: "block text-sm font-medium text-slate-700 mb-1" %>
           <%= f.text_area :description, rows: 4, class: "w-full rounded-xl border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" %>
         </div>
+
+        <!-- SECTION: Tags -->
+        <div class="sm:col-span-2">
+          <%= f.label :tag_list, "Tags (comma separated)", class: "block text-sm font-medium text-slate-700 mb-1" %>
+          <%= f.text_field :tag_list, value: @place.tag_list.join(", "), class: "w-full rounded-xl border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" %>
+        </div>
       </div>
     </div>
 

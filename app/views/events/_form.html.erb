@@ -17,6 +17,12 @@
         <%= f.text_area :description, rows: 4, class: "w-full rounded-xl border-gray-300 shadow-sm px-4 py-2" %>
       </div>
 
+      <!-- SECTION: Tags -->
+      <div class="sm:col-span-2">
+        <%= f.label :tag_list, "Tags (comma separated)", class: "block text-sm font-medium text-slate-700 mb-1" %>
+        <%= f.text_field :tag_list, value: @event.tag_list.join(", "), class: "w-full rounded-xl border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-4 py-2" %>
+      </div>
+
       <div class="grid gap-4 sm:grid-cols-3">
         <div class="sm:col-span-2">
           <%= f.label :start_time, "Start time", class: "block text-sm font-medium text-slate-700 mb-1" %>

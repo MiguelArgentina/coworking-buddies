@@ -34,6 +34,9 @@
 class Place < ApplicationRecord
   RECENT_PERIOD = 6.months
   extend FriendlyId
+
+  acts_as_taggable_on :tags
+
   friendly_id :name, use: :slugged
 
   belongs_to :user
