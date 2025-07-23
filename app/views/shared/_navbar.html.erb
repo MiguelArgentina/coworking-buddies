@@ -10,6 +10,8 @@
     <!-- Desktop nav -->
     <nav class="hidden md:flex h-full">
       <% if user_signed_in? %>
+        <%= render "shared/events_nav_links" %>
+        <%= render "shared/places_nav_links" %>
         <%= link_to edit_user_registration_path,
                     class: "flex items-center h-full px-6 font-medium text-[#4b5d9a] bg-[#f2f6fd] hover:bg-[#e5edfb] transition duration-200" do %>
           Edit Profile
@@ -30,7 +32,6 @@
           Login
         <% end %>
       <% end %>
-      <%= render "shared/places_nav_links" %>
     </nav>
 
     <!-- Mobile menu button -->
@@ -47,6 +48,8 @@
     <!-- Mobile nav -->
     <nav data-mobile-menu-target="menu" class="md:hidden hidden px-6 pb-4 bg-white/90 backdrop-blur-md shadow-md space-y-3 absolute top-16 left-0 w-full z-40">
       <% if user_signed_in? %>
+        <%= render "shared/events_nav_links" %>
+        <%= render "shared/places_nav_links" %>
         <%= link_to "Edit Profile", edit_user_registration_path, class: "block py-2 px-4 text-[#4b5d9a] hover:bg-[#e5edfb] rounded-md transition" %>
         <%= button_to destroy_user_session_path,
                       method: :delete,
@@ -58,7 +61,6 @@
         <%= link_to "Sign Up", new_user_registration_path, class: "block py-2 px-4 text-green-700 hover:bg-green-100 rounded-md transition" %>
         <%= link_to "Login", new_user_session_path, class: "block py-2 px-4 text-blue-700 hover:bg-blue-100 rounded-md transition" %>
       <% end %>
-      <%= render "shared/places_nav_links" %>
     </nav>
   </div>
 </header>

@@ -1,5 +1,40 @@
+# == Schema Information
+#
+# Table name: places
+#
+#  id            :bigint           not null, primary key
+#  address       :string
+#  city          :string
+#  description   :text
+#  latitude      :float
+#  longitude     :float
+#  name          :string
+#  slug          :string
+#  street_name   :string
+#  street_number :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  country_id    :bigint           not null
+#  state_id      :bigint           not null
+#  user_id       :bigint           not null
+#
+# Indexes
+#
+#  index_places_on_country_id  (country_id)
+#  index_places_on_slug        (slug) UNIQUE
+#  index_places_on_state_id    (state_id)
+#  index_places_on_user_id     (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (country_id => countries.id)
+#  fk_rails_...  (state_id => states.id)
+#  fk_rails_...  (user_id => users.id)
+#
 class Place < ApplicationRecord
   RECENT_PERIOD = 6.months
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   belongs_to :user
   belongs_to :country
@@ -20,6 +55,13 @@ class Place < ApplicationRecord
       city,
       state&.name,
       country&.name
+    ].compact.reject(&:blank?).join(', ')
+  end
+
+  def compact_full_address
+    [
+      city,
+      state&.name
     ].compact.reject(&:blank?).join(', ')
   end
 

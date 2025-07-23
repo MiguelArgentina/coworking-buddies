@@ -1,0 +1,4 @@
+<%= link_to "Events", events_path, class: "flex items-center h-full px-6 font-medium text-[#4b5d9a] hover:bg-[#e5edfb] transition duration-200" %>
+<% if user_signed_in? %>
+  <%= link_to "Add Event", new_event_path, class: "flex items-center h-full px-6 font-medium text-[#4b5d9a] hover:bg-[#e5edfb] transition duration-200" %>
+<% end %>
