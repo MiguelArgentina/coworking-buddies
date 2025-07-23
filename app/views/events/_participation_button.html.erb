@@ -1,0 +1,16 @@
+<div id="participation_button_event_<%= event.id %>">
+  <% if event.attending?(current_user) && defined?(participation) && participation.present? %>
+    <%= button_to "✅ Attending",
+                  event_event_participation_path(event, participation),
+                  method: :delete,
+                  data: { turbo_stream: true, confirm: "Unattend this event?" },
+                  class: "bg-green-100 hover:bg-green-200 text-green-800 font-semibold px-4 py-2 rounded-full text-sm" %>
+    <div class="text-xs text-gray-500 italic">Click to unattend</div>
+  <% else %>
+    <%= button_to "➕ Attend",
+                  event_event_participations_path(event),
+                  method: :post,
+                  data: { turbo_stream: true },
+                  class: "bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold px-4 py-2 rounded-full text-sm" %>
+  <% end %>
+</div>

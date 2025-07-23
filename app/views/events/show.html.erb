@@ -24,6 +24,15 @@
       <strong>👤 Hosted by:</strong> <%= @event.user.email %>
     </div>
 
+    <%= render "events/attendee_count", event: @event %>
+
+    <% if user_signed_in? %>
+      <div class="my-4">
+        <%= render "events/participation_button", event: @event, participation: @participation %>
+      </div>
+    <% end %>
+
+
     <div class="mt-6">
       <%= link_to "Add to Google Calendar", @event.google_calendar_link, target: "_blank",
                   class: "inline-block bg-green-100 hover:bg-green-200 text-green-800 font-semibold px-4 py-2 rounded-full" %>

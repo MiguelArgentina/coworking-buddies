@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "participation_button_event_#{@event.id}" do %>
+  <%= render "events/participation_button", event: @event, participation: @participation %>
+<% end %>
+
+<%= turbo_stream.replace "attendee_count_event_#{@event.id}" do %>
+  <%= render "events/attendee_count", event: @event %>
+<% end %>

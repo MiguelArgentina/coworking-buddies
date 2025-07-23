@@ -24,6 +24,7 @@
 
           <h3 class="text-lg font-bold text-slate-800 mb-1"><%= event.title %></h3>
           <p class="text-sm text-gray-600 mb-2"><%= truncate(event.description, length: 100) %></p>
+          <%= render "events/attendee_count", event: %>
           <p class="text-xs text-gray-500">
             at <%= event.place.name %><br>
             (<%= event.place.city %>, <%= event.place.state&.name %>)
