@@ -22,4 +22,18 @@
 class EventParticipation < ApplicationRecord
   belongs_to :user
   belongs_to :event
+
+  after_create_commit { broadcast_attendees_count }
+  after_destroy_commit { broadcast_attendees_count }
+
+  private
+
+  def broadcast_attendees_count
+    Turbo::StreamsChannel.broadcast_replace_to(
+      event,
+      target: "attendee_count_event_#{event.id}",
+      partial: "events/attendee_count",
+      locals: { event: event }
+    )
+  end
 end
