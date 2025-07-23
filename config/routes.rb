@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :event_participations, only: [:create, :destroy]
   end
 
+
+
   namespace :locations do
     get "lookups/geocode", to: "lookups#geocode"
     get "lookups/states", to: "lookups#states"
@@ -22,8 +24,9 @@ Rails.application.routes.draw do
   # Authenticated-only routes
   authenticate :user do
     resources :places, except: [:index]
-    resources :events, except: [:index]
-
+    resources :events, except: [:index] do
+      resource :event_participation, only: [:create, :destroy]
+    end
 
 
     namespace :locations do

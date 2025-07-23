@@ -7,7 +7,9 @@ class EventsController < ApplicationController
     @events = Event.order(start_time: :asc)
   end
 
-  def show; end
+  def show
+    @participation = @event.event_participations.find_by(user: current_user)
+  end
 
   def new
     @event = current_user.events.build

@@ -52,6 +52,10 @@ class Event < ApplicationRecord
     "#{base_url}&#{params.to_query}"
   end
 
+  def attending?(user)
+    event_participations.exists?(user_id: user.id)
+  end
+
   def start_time_cannot_be_in_the_past
     if start_time.present? && start_time < Time.current
       errors.add(:start_time, "can't be in the past")
