@@ -44,6 +44,8 @@ class Event < ApplicationRecord
   validates :title, :start_time, presence: true
   validate :start_time_cannot_be_in_the_past
 
+  broadcasts_to ->(event) { event }, inserts_by: :prepend
+
   def google_calendar_link
     base_url = "https://www.google.com/calendar/render?action=TEMPLATE"
     params = {
