@@ -26,6 +26,9 @@
 #
 class Event < ApplicationRecord
   extend FriendlyId
+
+  acts_as_taggable_on :tags
+
   friendly_id :title, use: :slugged
 
   attr_accessor :duration_amount, :duration_unit

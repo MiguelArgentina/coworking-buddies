@@ -22,7 +22,19 @@ export default class extends Controller {
             maxZoom: 19,
             attribution: "© OpenStreetMap"
         }).addTo(this.map)
+
         this.markers = []
+
+        // Auto-trigger geocode if address fields are filled (e.g., on edit)
+        if (
+            this.streetNameTarget?.value &&
+            this.streetNumberTarget?.value &&
+            this.cityTarget?.value &&
+            this.stateTarget?.value &&
+            this.countryTarget?.value
+        ) {
+            this.refreshAddress()
+        }
     }
 
     refreshAddress() {
@@ -44,16 +56,16 @@ export default class extends Controller {
         const url = `/locations/lookups/geocode?q=${encodeURIComponent(address)}`
         const response = await fetch(url)
         const data = await response.json()
-        // 🛠️ Store the current selected value before clearing
+
         const previouslySelected = this.resultsTarget.value
-        // Clear previous options
         this.resultsTarget.innerHTML = `<option value="">Choose a location</option>`
 
         if (!this.map) {
             console.warn("Map is not initialized. Skipping rendering markers.")
             return
         }
-        if (this.markers){
+
+        if (this.markers) {
             this.markers.forEach(m => this.map.removeLayer(m))
         }
         this.markers = []
@@ -62,10 +74,13 @@ export default class extends Controller {
             const option = document.createElement("option")
             option.value = `${result.lat},${result.lon}`
             option.text = `${index + 1}. ${result.display_name}`
+
             if (option.value === previouslySelected) {
                 option.selected = true
             }
+
             this.resultsTarget.appendChild(option)
+
             const marker = L.marker([result.lat, result.lon])
                 .addTo(this.map)
                 .bindTooltip(`${index + 1}`, {
@@ -73,12 +88,10 @@ export default class extends Controller {
                     direction: "top",
                     className: "marker-label"
                 })
+
             this.markers.push(marker)
-            if (this.markers.length > 0) {
-                const group = L.featureGroup(this.markers)
-                this.map.fitBounds(group.getBounds().pad(0.2))
-            }
         })
+
         if (this.markers.length > 0) {
             const selected = this.resultsTarget.value
             if (selected) {
@@ -88,6 +101,8 @@ export default class extends Controller {
                 const group = L.featureGroup(this.markers)
                 this.map.fitBounds(group.getBounds().pad(0.2))
             }
+        } else {
+            console.warn("No geocoding results returned — skipping map update.")
         }
     }
 

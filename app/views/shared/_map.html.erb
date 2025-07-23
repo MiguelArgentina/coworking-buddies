@@ -1,11 +1,5 @@
-<% if place.persisted? %>
 <div
-  data-controller="leaflet-map"
-  data-leaflet-map-latitude-value="<%= place.latitude %>"
-  data-leaflet-map-longitude-value="<%= place.longitude %>"
-  data-leaflet-map-name-value="<%= place.name %>"
+  id="map"
   style="height: 400px;"
+  <%= "data-controller=\"leaflet-map\" data-leaflet-map-latitude-value=\"#{place.latitude}\" data-leaflet-map-longitude-value=\"#{place.longitude}\" data-leaflet-map-name-value=\"#{place.name}\"" if place.persisted? %>
 ></div>
-<% else %>
-<div id="map" style="height: 400px;"></div>
-<% end %>
