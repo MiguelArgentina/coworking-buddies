@@ -13,7 +13,7 @@
 ## ✨ Features
 
 - 📍 Add new coworking places with address, description, and geolocation.
-- 🗺️ Map integration using Leaflet.js and OpenStreetMap.
+- 🗺️ Map integration using Leaflet.js and OpenStreetMap for in-maps visualization.
 - 🌎 Dependent country → state → city dropdowns.
 - ✅ Geocoding suggestions with selectable address matches.
 - 🗳️ Voting system to rate spots (thumbs up/down).
