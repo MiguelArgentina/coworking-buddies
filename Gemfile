@@ -27,6 +27,9 @@ gem "countries"
 # Tagging
 gem "acts-as-taggable-on"
 
+# Seeding
+gem 'faker'
+
 # Friendly URLs
 gem "friendly_id"
 

@@ -112,6 +112,8 @@ GEM
     drb (2.2.3)
     erb (5.0.1)
     erubi (1.13.1)
+    faker (3.5.2)
+      i18n (>= 1.8.11, < 2)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     geocoder (1.8.5)
@@ -298,6 +300,7 @@ DEPENDENCIES
   countries
   debug
   devise (~> 4.9)
+  faker
   friendly_id
   geocoder (~> 1.8)
   importmap-rails
