@@ -37,9 +37,11 @@
 ```bash
 git clone https://github.com/MiguelArgentina/coworking_buddies.git
 cd coworking_buddies
-bin/setup
-bin/dev
+bin/setup # Installs gems, prepares DB, seeds test data
+bin/dev   # Starts server and frontend pipeline
 ```
+> You’ll get a few users, places, and upcoming events to explore right away.  
+> Use email like `alice@example.com` with password `password` to log in.
 
 Visit: [http://localhost:3000](http://localhost:3000)
 
